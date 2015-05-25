@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CS290: How-To: More Searches</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--Div structure information found on http://www.456bereastreet.com/lab/developing_with_web_standards/csslayout/2-col/ -->
+    <div id="wrap">
+      <div id="header">
+        <h1>Additional Criteria to Search On</h1>
+      </div>
+      <div id="main">
+        <h2>More Searching Methods</h2>
+        <p>Now that we have introduced you to the simple text search, we can get into a little detail on ways you can enhance your text search, and other ways to filter your data.</p>
+        <h2>Text Searches with Keywords</h2>
+        <p>There are keywords that can be used in the simple text search shown on the prior page.  This will allow you to search particular fields for matching text, instead of searching every field as the samples on the prior page does.  The following table details some of the keywords you can use in your text query searches:</p>
+        <table>
+          <caption>Keywords to use in Text Searches</caption>
+          <thead>
+            <tr><th>Keyword <th>What it Does
+          </thead>
+          <tbody>
+            <tr><td>intitle <td>This searches the title for the text following this keyword.
+            <tr><td>inauthor <td>This searches the author for the text following this keyword.
+            <tr><td>subject <td>This searches the subject or category for the text following the keyword.
+            <tr><td>inpublisher <td>This searches the publisher for the text following this keyword.
+            <tr><td>isbn <td>This searches the ISBN Number for the text following this keyword.
+          </tbody>
+        </table>
+        <br>
+        <p>There are other fields that you can use to search; the above is just a subset of the fields available to search in the text search.</p>
+        <p>The formatting of this search is much the same as the text search of the prior page, just with the addition of some keywords.  For instance, if we wanted to search for The Great Hunt by Robert Jordan, we could use the following keyword search:</p>
+        <p><code>https://www.googleapis.com/books/v1/volumes?q=hunt+inauthor:jordan&key=yourAPIKey</code></p>
+        <p>Notice that the 'inauthor' keyword was used in the above example, and it was used as part of the 'q' string and connected with a '+'.</p>
+        <p>Here is the example code from the prior page with using the above search</p>
+        <pre>
+  &lt;?php
+  include 'storedInfo.php';
+  
+  //use curl to send query to the Google Books API
+  $searchurl = "https://www.googleapis.com/books/v1/volumes?q=hunt+inauthor:jordan&key=" . $myAPIKey;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $searchurl);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION,1);
+  curl_exec($curl);
+  curl_close($curl);
+  ?&gt;
+        </pre>
+        <h2>Parameters Other Than 'q' can be Used in Searches</h2>
+        <p>As the title of this section indicates, parameters other than the 'q' we have been using can be used in searches.  If  used in conjunction with the 'q' parameter, they must be concatenated on the search string using the &amp;.</p>
+        <h4>Filter</h4>
+        <p>One of these other parameters is the <code>filter</code> parameter.  This can be used to obtain only certain results.  For instance, setting the <code>filter</code> parameter equal to <code>free-ebooks</code> returns only those results that are free Google eBooks.</p>
+        <p><code>Filter</code> can also be set equal to values such as <code>paid-ebooks</code>, <code>ebooks</code>, etc.</p>
+        <p>Example getting only the free ebooks of Robert Jordan's books:</p>
+        <p><code>https://www.googleapis.com/books/v1/volumes?q=robert+jordan&filter=free-ebook&key=yourAPIKey</cpde></p>
+        <h4>Print Type</h4>
+        <p>Another parameter that can be used to get specific results is the <code>printType</code> parameter.  This can be used to restrict the results of your query to those that are just books, or just magazines.  An example code is included below.
+        <p><code>https://www.googleapis.com/books/v1/volumes?q=robert+jordan&printType=books&key=yourAPIKey</code></p>
+      </div>
+      <div id="sidebar">
+        <a href="index.html">Home</a>
+        <br><a href="getting_started.html">Getting Started</a>
+        <br><a href="simple_searches.html">Simple Text Searches</a>
+        <br><a href="more_searches.html">Additional Text Search Features</a>
+        <br><a href="volumeid_searches.html">More Ways to Search</a>
+        <br><a href="display.html">Displaying Results</a>
+        <br><a href="resources.html">More Resources</a>
+      </div>
+      <div id="footer">
+        <h4><a href="simple_searches.html">&laquo; Previous</a>   <a href="index.html">Home</a>   <a href="volumeid_searches.html">Next &raquo;</a></h4>
+      </div>
+    </div>
+  </body>
+</html>

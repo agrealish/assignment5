@@ -2,23 +2,66 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>CS290: How-To Assignment</title>
+    <title>CS290: How-To: Text Searches</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <!--Div structure information found on http://www.456bereastreet.com/lab/developing_with_web_standards/csslayout/2-col/ -->
     <div id="wrap">
-      <div id="header"></div>
-      <div id="main"></div>
+      <div id="header">
+        <h1>Getting Started with Text Searches</h1>
+      </div>
+      <div id="main">
+        <h2>Basic Format for Searching</h2>
+        <p>First, let us take a look at the basic format for searching for items in the Google Books API.  The basic format looks like:</p>
+        <p><code>https://www.googlepapis.com/books/v1/[CollectionName]/[resourceID?parameters]</code></p>
+        <p>Before you panic about what on earth that actually means, let us take a look at the different parts of this url:</p>
+        <table>
+          <caption>Parts of the Basic Google Books API Search</caption>
+          <thead>
+            <tr><th>Part of the Search <th>What it Means
+          </thead>
+          <tbody>
+            <tr><td>https://www.googleapis.com/books/v1 <td>This is the basic call to the Google Books API.  This is set and will not change for this API.  The 'books' portion refers to the API being used, and the 'v1' portion refers to the version of the API being used.
+            <tr><td>[CollectionName] <td>This refers to the collection you are searching within the Google Books API.  There are two basic collections with this API: volumes and bookshelves.  We will be focused on volumes primarily.
+            <tr><td>[resourceID?parameters] <td>This is where your query or search parameters go and will be the focus of this page.  Note: you must <i>always</i> include your API Key in this portion.
+          </tbody>
+        </table>
+        <br>
+        <h2>Basic Text Searches</h2>
+        <p>Okay, now that you know the basic format of the search query we will be using, let us focus on a simple text search query for the Google Books API.  From the above table, this will be in the [resourceID?parameters] portion.
+        <p>Recall from the table above that we will be focusing mainly on the volume collection on this page.  That means the core of our search query is:
+        <p><code>https://www.googleapis.com/books/v1/volumes</code></p>
+        <p>In a text search, we do not need a 'resourceID' so all we need to start with is the '?'.  A basic text search uses the keyword 'q' to search - and we need to set 'q' equal to the search terms.  So, if we wanted to search for 'Robert Jordan', our code would like:</p>
+        <p><code>https://www.googleapis.com/books/v1/volumes?q=robert+jordan&key=yourAPIkey</code></p>
+        <p>Notice the addition of the API Key appended at the end of the search.  As stated above, the API Key must always be included in this search.</p>
+        <p>You might also notice that we used '+' to concatenate the words 'robert' and 'jordan' in our search url.  You might have noticed that urls typically have some issues with spaces, so it is much better practice to use '+' to search for two or more words.</p>
+        <p>Congratulations!  You have made your first text query.  Now let us look at some example code below on creating the actual query in a webpage.</p>
+        <h2>Example Code</h2>
+        <p>The following code can be used to send the query we created above to the Google Books API.  This sample code is in php, however, which is a server side language so you need to load the file onto a server for it to work.</p>
+        <pre>
+  &lt;?php
+  include 'storedInfo.php';
+  
+  //use curl to send query to the Google Books API
+  $searchurl = "https://www.googleapis.com/books/v1/volumes?q=robert+jordan&key=" . $myAPIKey;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $searchurl);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION,1);
+  curl_exec($curl);
+  curl_close($curl);
+  ?&gt;
+        </pre>
+        <p>For security reasons, I have used the variable $myAPIKey to represent my API Key.  The variable is defined in the 'storedInfo.php' file included in the above code.  You can do the same, or simply insert your API Key in the string (though, you will want to be sure you have some security involved).</p>
+      </div>
       <div id="sidebar">
         <a href="index.html">Home</a>
         <br><a href="getting_started.html">Getting Started</a>
-        <br><a href="simple_searches.html">Simple Searches</a>
-        <br><a href="more_searches.html">Additional Search Features</a>
+        <br><a href="simple_searches.html">Simple Text Searches</a>
+        <br><a href="more_searches.html">Additional Text Search Features</a>
+        <br><a href="volumeid_searches.html">More Ways to Search</a>
         <br><a href="display.html">Displaying Results</a>
-        <br><a href="bookshelves.html">Bookshelves</a>
         <br><a href="resources.html">More Resources</a>
-        <br><a href="branding.html">Branding</a>
       </div>
       <div id="footer">
         <h4><a href="getting_started.html">&laquo; Previous</a>   <a href="index.html">Home</a>   <a href="more_searches.html">Next &raquo;</a></h4>

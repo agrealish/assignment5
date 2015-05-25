@@ -14,17 +14,39 @@ http://www.456bereastreet.com/lab/developing_with_web_standards/csslayout/2-col/
 #main {
   float:right;
   padding:10px;
-  width:500px;
+  width:480px;
 }
 
 #sidebar {
   float:left;
   padding:10px;
-  width:250px
+  width:230px
 }
 
 #footer {
   clear:both;
   padding:5px 10px;
   text-align:center;
+}
+
+/*table formatting comes from assignment 2*/
+table {
+  border-collapse:collapse; border:double;
+}
+
+table th,
+table td {
+  border:double; border-color:black;
+}
+
+img {
+  width:400px; height:180px;
+}
+
+/*code is from http://www.w3schools.com/tags/tag_pre.asp */
+pre {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
 }

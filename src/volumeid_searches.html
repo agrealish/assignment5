@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CS290: How-To: Non-'q' Searches</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--Div structure information found on http://www.456bereastreet.com/lab/developing_with_web_standards/csslayout/2-col/ -->
+    <div id="wrap">
+      <div id="header">
+        <h1>Non-Text Searches</h1>
+      </div>
+      <div id="main">
+        <h2>Other Types of Searches</h2>
+        <p>We are briefly going to cover other types of searches other than the text search previously covered.  Specifically, we will briefly cover how to search by Volume ID, and how to search bookshelves.</p>
+        <h2>Searching For A Volume</h2>
+        <p>One way that you can search on the Google Books API, is by searching for a specific volume.  A volume ID is a unique string that is given to each volume that Google Books knows about, so you do need to have prior knowledge of the Volume ID in order to search this way.  Your text search does return the volume ID, so subsequent searches for the same book can be made easire by this search method.</p>
+        <p>Example of using ID to search:</p>
+        <p><code>https://www.googleapis.com/books/v1/volumes/yngEsxEO4QYC?key=yourAPIKey</code></p>
+        <h2>Searching a Bookshelf</h2>
+        <p>Bookshelves are ways that specific users who utilize the Google Books app as part of their Google tools can save books to their account.  As you may have guessed, some of this data is public and some of this data is more private.  With the API Key, we will only be able to see bookshelves that have been made public.</p>
+        <p>One thing with searching specific bookshelves is that you need to have the ID of the user whose bookshelves you want to view in order to search them.  So if you don't have the user ID, you cannot see that bookshelf.</p>
+        <p>To see a user's public bookshelves, you can use the following code format:</p>
+        <p><code>https://www.googleapis.com/books/v1/users/[userId]/bookshelves</code></p>
+        <p>Again, to use this code, you need the user ID of the user whose bookshelves you want to see.  For this reason, I am not going to include specific examples for this part as I would rather not point to a specific user in an example.</p>
+        <p>To actually see the books on a specific bookshelf, you can use the following code format:</p>
+        <p><code>https://www.googleapis.com/books/v1/users/[userId]/bookshelves/[shelf]/volumes?key=yourAPIKey</code></p>
+        <p>Note the addition of the input [shelf] (and recall that this needs to be a public bookshelf for us to retrieve anything).  The value [shelf] represents a numeric value that corresponds to a particular shelf for a user.  Google provides some pre-defined shelves for every user, which are detailed below:</p>
+        <table>
+          <caption>Shelf IDs</caption>
+          <thead>
+            <tr><th>Shelf ID <th>Title of Shelf
+          </thead>
+          <tbody>
+            <tr><td>0 <td>Favorites
+            <tr><td>1 <td>Purchased
+            <tr><td>2 <td>To Read
+            <tr><td>3 <td>Reading Now
+            <tr><td>4 <td>Have Read
+            <tr><td>5 <td>Reviewed
+            <tr><td>6 <td>Recently Viewed
+            <tr><td>7 <td>My eBooks
+            <tr><td>8 <td>Books For You - if Google does not have recommendations, then this shelf does not exist
+          </tbody>
+        </table>
+      </div>
+      <div id="sidebar">
+        <a href="index.html">Home</a>
+        <br><a href="getting_started.html">Getting Started</a>
+        <br><a href="simple_searches.html">Simple Text Searches</a>
+        <br><a href="more_searches.html">Additional Text Search Features</a>
+        <br><a href="volumeid_searches.html">More Ways to Search</a>
+        <br><a href="display.html">Displaying Results</a>
+        <br><a href="resources.html">More Resources</a>
+      </div>
+      <div id="footer">
+        <h4><a href="more_searches.html">&laquo; Previous</a>   <a href="index.html">Home</a>   <a href="display.html">Next &raquo;</a></h4>
+      </div>
+    </div>
+  </body>
+</html>

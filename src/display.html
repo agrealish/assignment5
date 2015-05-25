@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CS290: How-To: Display</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--Div structure information found on http://www.456bereastreet.com/lab/developing_with_web_standards/csslayout/2-col/ -->
+    <div id="wrap">
+      <div id="header">
+        <h1>Displaying the Data</h1>
+      </div>
+      <div id="main">
+        <h2>Displaying Data</h2>
+        <p>Now for the important part for your user - displaying the search results.  We are going to use the sample code from the 'Additional Text Search Features' page, which is again displayed below:</p>
+        <pre>
+  &lt;?php
+  include 'storedInfo.php';
+  
+  //use curl to send query to the Google Books API
+  $searchurl = "https://www.googleapis.com/books/v1/volumes?q=hunt+inauthor:jordan&key=" . $myAPIKey;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $searchurl);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION,1);
+  curl_exec($curl);
+  curl_close($curl);
+  ?&gt;
+        </pre>
+        <p>Now the result we get from this search is a bit messy looking.  See the image below for an idea of what this looks like.</p>
+        <img src="results.jpg">
+        <p>This is not what we want to end up presenting to our user.  Fortunately, there are ways to clean this up!</p>
+        <h4>Returning JSON Objects</h4>
+        <p>The reason why the results look messy is because the result we received was in the form of a JSON Object.  I'm not going to get into what a JSON Object is in this How-To Guide, but I will adjust the code from before to make this more manageable.  Essentially I am going to adjust the code from before to 'decode' the JSON object.</p>
+        <p>Here is what the code now looks like:</p>
+        <pre>
+  &lt;?php
+  include 'storedInfo.php';
+  
+  //use curl to send query to the Google Books API
+  $searchurl = "https://www.googleapis.com/books/v1/volumes?q=hunt+inauthor:jordan&key=" . $myAPIKey;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $searchurl);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION,1);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+  $result = json_decode(curl_exec($curl));
+  echo "Title: " . $result->items[0]->volumeInfo->title . "<br>";
+  echo "Subtitle: " . $result->items[0]->volumeInfo->subtitle . "<br>";
+  echo "Author: " . $result->items[0]->volumeInfo->authors[0] . "<br>";
+  echo "Published Date: " . $result->items[0]->volumeInfo->publishedDate . "<br>";
+  echo "Description: " . $result->items[0]->volumeInfo->description . "<br>";
+  echo "Link: " . $result->items[0]->selfLink;
+  curl_close($curl);
+  ?&gt;
+        </pre>
+        <br>
+        <p>With these edits, we now have the following displayed to the user:</p>
+        <img src="results_pretty.jpg">
+        <p>Much better display!</p>
+        <p>If you want to learn more about JSON Objects so that you can customize your own displays, you can go to this website: http://json.org/</p>
+        <p>Note that I was using this in PHP, so if you would like to also use this in PHP, be sure to read information pertaining to using JSON in PHP.</p>
+        <h2>Embedded Viewer API</h2>
+        <p>The Embedded Viewer API lets you actually embed book content from Google Books directly into your web pages.  The API also helps you manipulate book previews.  If you want to learn more about the Embedded Viewer API and how to use it, please click <a href="https://developers.google.com/books/docs/viewer/developers_guide">here</a>.  The Embedded Viewer API is an excellent way to showcase Google Books in your website, but keep in mind the Developer's Guide assumes you are familiar with JavaScript programming and object-oriented programming concepts.</p>
+      </div>
+      <div id="sidebar">
+        <a href="index.html">Home</a>
+        <br><a href="getting_started.html">Getting Started</a>
+        <br><a href="simple_searches.html">Simple Text Searches</a>
+        <br><a href="more_searches.html">Additional Text Search Features</a>
+        <br><a href="volumeid_searches.html">More Ways to Search</a>
+        <br><a href="display.html">Displaying Results</a>
+        <br><a href="resources.html">More Resources</a>
+      </div>
+      <div id="footer">
+        <h4><a href="volumeid_searches.html">&laquo; Previous</a>   <a href="index.html">Home</a>   <a href="resources.html">Next &raquo;</a></h4>
+      </div>
+    </div>
+  </body>
+</html>

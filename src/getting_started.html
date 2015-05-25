@@ -12,17 +12,26 @@
         <h1>Getting Started</h1>
       </div>
       <div id="main">
-        
+        <h2>Getting your API Key</h2>
+        <p>Before you start using the Google Books API, you need to get an API Key.  This is necessary in order to perform the searches and actually use the Google API.  As discussed on the next page, the API Key has to be appended onto all search queries.  This page will help you get your API Key.</p>
+        <h2>Google Developer</h2>
+        <p>To get your API Key, you need to go to the <a href="https://console.developers.google.com/">Google Developer Console</a>.</p>
+        <p>Once at the Google Developer Console, you will need to start a new project (if you do not have one already created that you want to use).  To create a new project, simply click the 'New Project' button on the top left of the page.  This should pop up the screen shown below.</p>
+        <img src="newproject.jpg">
+        <p>Give your project a name, and you can use the automatically generated Project ID, noting that this needs to be unique.  Then click 'Create'.</p>
+        <p>Now we need to enable the API Key for the Books product.  Go ahead and click on the project you just created.  On the new apge you are on, you should click the 'APIs & auth' link on the left sidebar.  This will drop down a few more items to choose from.  Click on 'APIs' and search for 'Books' on the new page.  You should have something called 'Books API' in the results - click on that.  Finally, click 'Enable API' and you should now have this screen below (if already enabled, skip this step):</p>
+        <img src="enableAPI.jpg">
+        <p>Your Google Books API Key is now enabled!  Unfortunately, we are not yet done.  Now click on 'Credentials' in the left sidebar.  You should have two choices - oAuth or Public API access.  As mentioned on the first page of this guide, we are going to be using solely public access.  So click the button entitled 'Create new Key' under the 'Public API access' section.  You will have choices on what kind of key to create.  This guide will use the 'Browser Key', so create that one for now.  Now click 'Create' and you have an API key!</p>
+        <p>You are now ready to create searches for the Google Books API.</p>
       </div>
       <div id="sidebar">
         <a href="index.html">Home</a>
         <br><a href="getting_started.html">Getting Started</a>
-        <br><a href="simple_searches.html">Simple Searches</a>
-        <br><a href="more_searches.html">Additional Search Features</a>
+        <br><a href="simple_searches.html">Simple Text Searches</a>
+        <br><a href="more_searches.html">Additional Text Search Features</a>
+        <br><a href="volumeid_searches.html">More Ways to Search</a>
         <br><a href="display.html">Displaying Results</a>
-        <br><a href="bookshelves.html">Bookshelves</a>
         <br><a href="resources.html">More Resources</a>
-        <br><a href="branding.html">Branding</a>
       </div>
       <div id="footer">
         <h4><a href="index.html">&laquo; Previous</a>   <a href="index.html">Home</a>   <a href="simple_searches.html">Next &raquo;</a></h4>
